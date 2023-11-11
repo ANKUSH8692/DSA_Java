@@ -1,0 +1,28 @@
+    public static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode llist, int data) {
+        DoublyLinkedListNode temp=llist;
+        DoublyLinkedListNode temp2=new DoublyLinkedListNode(data);
+        // while loop for travel to the end of Linked list
+        while(temp.next!=null){
+            // if data is less then the starting node of linked list
+            if(temp.data>temp2.data){
+                temp2.next=llist;
+                llist.prev=temp2;
+                llist=temp2;
+                return llist;
+            }
+            // inserted data in the middle in sorted list
+            if(temp.next.data>temp2.data){
+                temp2.next=temp.next;
+                temp.next.prev=temp2;
+                temp.next=temp2;
+                temp2.prev=temp;
+                return llist;
+            }
+            // if data is bigger then the data of list then add to the end
+            temp=temp.next;
+        }
+        temp.next=temp2;
+        temp2.prev=temp;
+        return llist;
+
+    }
