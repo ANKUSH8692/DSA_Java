@@ -1,0 +1,59 @@
+import java.util.*;
+
+    class node{
+        int data;
+        node right,left;
+        node(int data){
+            this.data=data;
+            this.right=null;
+            this.left=null;
+        }
+    }
+    class sumroot_leaf{
+        static node create(){
+            int data;
+            node root=null;
+            Scanner sc=new Scanner(System.in);
+            data=sc.nextInt();
+            if(data==-1){
+                return null;
+            }
+            root=new node(data);
+            System.out.println("enter the left child"+root.data);
+            root.left=create();
+            System.out.println("enter the right child for"+root.data);
+            root.right=create();
+            return root;
+        }
+    static void inorder(node root){
+        if(root==null){
+            return;
+        }
+        inorder(root.left);
+        System.out.println(root.data);
+        inorder(root.right);
+    }
+    static int sum(node root,int curr){
+        if(root==null){
+            return 0;
+        }
+        curr=curr*10+root.data;
+        if(root.left==null && root.right==null){
+            return curr;
+        }
+        int left=sum(root.left,curr);
+        int right=sum(root.right,curr);
+        return left+right;
+    }
+    
+        
+    public static void main(String []args){
+        node root=create();
+        System.out.println("inorder");
+        inorder(root);
+        int curr=0;
+        int s=sum(root,curr);
+        System.out.println("The sum of root to leaf is "+s);
+
+    }
+}
